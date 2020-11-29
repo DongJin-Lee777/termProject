@@ -1,0 +1,14 @@
+div#boardSection {
+    padding: 30px;
+    text-align: center;
+}
+
+div#boardSection h1 {
+    padding-bottom: 10px;
+}
+
+div#boardSection div#boardList{
+    background-color: white;
+    min-height: max-content;
+    padding: 5px;
+}

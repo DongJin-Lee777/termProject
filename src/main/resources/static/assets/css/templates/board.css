@@ -1,0 +1,61 @@
+div div#board {
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+div div#board div#writer,
+div div#board div#date{
+    max-width: 200px;
+}
+
+div div#board div#content {
+    min-height: 450px;
+}
+
+div div#board #modifyBtn,
+div div#board #deleteBtn,
+div div#board #modifyEndBtn {
+     float: right;
+     margin: 10px 0 10px 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+div#commEditBox {
+    padding-left: 45px;
+}
+
+div#commEditBox div#commContentEdit {
+    border: 1px solid silver;
+    background-color: white;
+    margin: 0;
+    min-height: 180px;
+}
+
+div#commEditBox button#commEditBtn{
+
+}
+
+div div#commSection div.commBox {
+    border: 1px solid silver;
+    background-color: white;
+    width: 800px;
+    padding: 10px;
+    margin-bottom: 25px;
+}
+
+.commBoxR {
+    margin-right: 0 !important;
+    background-color: wheat !important;
+}
+
+.commBoxL {
+    margin-left: 0 !important;
+}
+
+div div#commSection div.commBox .commContent{
+    min-height: 100px;
+    padding-left: 20px;
+}

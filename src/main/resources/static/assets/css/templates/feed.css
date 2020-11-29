@@ -1,0 +1,30 @@
+div#mainSection h1 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+div.feed {
+    max-width: 80%;
+    padding: 30px;
+}
+
+div.feed div {
+    background-color: white;
+    border: 1px solid black;
+}
+
+div.feed div.feedBox {
+    border: 1px solid black;
+    text-align: left;
+}
+
+div.feedContent {
+    min-height: 100px;
+}
+
+div.feed div.upBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F8F9FA;
+}

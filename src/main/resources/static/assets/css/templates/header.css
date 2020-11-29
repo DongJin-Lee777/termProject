@@ -1,0 +1,45 @@
+div#header {
+    background-color: white;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+div#header div#leftHeader,
+div#header div#leftHeader ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+div#header div#leftHeader ul {
+    margin: 0;
+}
+
+div#header div#leftHeader ul li {
+    display: inline-block;
+    list-style: none;
+    padding-right: 50px;
+}
+
+div#header div#leftHeader a {
+    text-decoration: none;
+    color: black;
+}
+
+div#header div#leftHeader ul li a:hover {
+    color: #DAE0E6;
+}
+
+div#header div#rightHeader {
+    display: flex;
+    align-items: center;
+}
+
+div#header div#rightHeader #userName{
+    color: black;
+    padding: 5px;
+}

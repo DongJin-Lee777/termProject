@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<body class="is-preload" style="background-color: #DAE0E6">
+<div th:replace="layout/layout :: header"></div>
+<div class="container">
+    <div class="container" id="board">
+        <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+                <span class="input-group-text">제목</span>
+            </div>
+            <div class="form-control" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg" id="title">test</div>
+            <div class="form-control" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg" id="writer">admin</div>
+            <div class="form-control" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg" id="date">0000.00.00</div>
+        </div>
+
+        <div class="input-group input-group-lg">
+            <div class="form-control" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg" id="content"></div>
+        </div>
+
+        <button class="btn btn-danger" id="deleteBtn">삭제</button>
+        <button class="btn btn-success" id="modifyBtn">수정</button>
+    </div>
+    <hr>
+    <div class="container row" id="commEditBox">
+        <div class="container commBox col-10" contenteditable="true" id="commContentEdit">
+        </div>
+        <button class="btn btn-primary col-2" id="commEditBtn">댓글 등록</button>
+    </div>
+    <h1><span>2</span> COMMENTS</h1>
+    <div class="container" id="commSection">
+        <div class="container commBox commBoxL">
+            <div class="row">
+                <div class="col-1 text-left">
+                    0000000
+                </div>
+                <div class="col-9 text-left">
+                    YYYY-MM-DD HH:MI
+                </div>
+                <div class="col-2 text-right">
+                    <i class="fas fa-pen"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>X</span>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="commContent col-12">
+                    Content
+                </div>
+                <div class="col-12 text-right">
+                    <i class="far fa-thumbs-up"></i> 3
+                    <i class="far fa-grin-squint-tears"></i> 3
+                    <i class="fas fa-poo"></i> 0
+                </div>
+            </div>
+        </div>
+
+        <div class="container commBox commBoxR">
+            <div class="row">
+                <div class="col-1 text-left">
+                    0000000
+                </div>
+                <div class="col-9 text-left">
+                    YYYY-MM-DD HH:MI
+                </div>
+                <div class="col-2 text-right">
+                    <i class="fas fa-pen"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>X</span>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="commContent col-12">
+                    Content
+                </div>
+                <div class="col-12 text-right">
+                    <i class="far fa-thumbs-up"></i> 3
+                    <i class="far fa-grin-squint-tears"></i> 3
+                    <i class="fas fa-poo"></i> 0
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="layout/layout :: footer"></div>
+</body>
+</html>

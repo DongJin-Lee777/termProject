@@ -1,0 +1,24 @@
+footer {
+    background-color: gray;
+    padding: 15px 5px 5px 5px;
+    text-align: center;
+}
+
+footer ul {
+    list-style: none;
+    color: white;
+}
+
+footer .icons {
+    font-size: 30px;
+}
+
+footer .icons i {
+    padding: 8px;
+    color: black;
+}
+
+footer .icons i:hover {
+    color : white;
+    cursor: pointer;
+}
