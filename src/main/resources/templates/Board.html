@@ -10,22 +10,32 @@
                 <span class="input-group-text">제목</span>
             </div>
             <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="title">test</div>
+                 aria-describedby="inputGroup-sizing-lg" id="title">test
+            </div>
             <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="writer">admin</div>
+                 aria-describedby="inputGroup-sizing-lg" id="writer">admin
+            </div>
             <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="date">0000.00.00</div>
+                 aria-describedby="inputGroup-sizing-lg" id="date">0000.00.00
+            </div>
         </div>
 
         <div class="input-group input-group-lg">
             <div class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-lg" id="content"></div>
         </div>
-
-        <button class="btn btn-danger" id="deleteBtn">삭제</button>
-        <button class="btn btn-success" id="modifyBtn">수정</button>
+        <div id="boardBtns">
+            <i class="far fa-thumbs-up row"> 5</i>
+            <button class="btn btn-success" id="modifyBtn">수정</button>
+            <button class="btn btn-danger" id="deleteBtn">삭제</button>
+        </div>
     </div>
-    <hr>
+    <!-- COMMENTS -->
+    <div class="container" id="divide">
+        <div class="container">
+            <hr>
+        </div>
+    </div>
     <div class="container row" id="commEditBox">
         <div class="container commBox col-10" contenteditable="true" id="commContentEdit">
         </div>

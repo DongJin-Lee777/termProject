@@ -2,6 +2,7 @@ package com.termproject.dongjin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class indexController {
@@ -32,12 +33,17 @@ public class indexController {
     }
 
     @GetMapping("/board")
-    public String board() {
+    public String getBoard() {
         return "Board";
     }
 
-    @GetMapping("/editboard")
-    public String editboard() {
+    @PostMapping("/board")
+    public String postBoard() {
+        return "Board";
+    }
+
+    @GetMapping("/editBoard")
+    public String editBoard() {
         return "editBoard";
     }
 }

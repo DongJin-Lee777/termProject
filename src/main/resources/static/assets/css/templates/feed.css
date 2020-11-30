@@ -10,7 +10,11 @@ div.feed {
 
 div.feed div {
     background-color: white;
-    border: 1px solid black;
+}
+
+div.feed hr {
+    padding: 0;
+    margin: 0;
 }
 
 div.feed div.feedBox {
@@ -20,11 +24,28 @@ div.feed div.feedBox {
 
 div.feedContent {
     min-height: 100px;
+    padding: 15px 0 15px 15px;
 }
 
 div.feed div.upBox {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #F8F9FA;
+    border-right: 1px solid black;
+}
+
+div.feed div.upBox i {
+    margin: 20px 0;
+}
+
+div.feed div.upBox .up,
+div.feed div.upBox .down {
+    cursor: pointer;
+}
+
+div.info {
+    padding: 0 10px 0 0;
+    margin: 0;
 }

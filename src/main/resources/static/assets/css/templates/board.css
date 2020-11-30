@@ -12,11 +12,9 @@ div div#board div#content {
     min-height: 450px;
 }
 
-div div#board #modifyBtn,
-div div#board #deleteBtn,
-div div#board #modifyEndBtn {
-     float: right;
-     margin: 10px 0 10px 10px;
+div div#board div#boardBtns {
+    float: right;
+    margin: 10px 0 10px 10px;
 }
 
 h1 {
@@ -25,6 +23,7 @@ h1 {
 
 div#commEditBox {
     padding-left: 45px;
+    margin-bottom: 30px;
 }
 
 div#commEditBox div#commContentEdit {
@@ -32,10 +31,6 @@ div#commEditBox div#commContentEdit {
     background-color: white;
     margin: 0;
     min-height: 180px;
-}
-
-div#commEditBox button#commEditBtn{
-
 }
 
 div div#commSection div.commBox {
@@ -58,4 +53,12 @@ div div#commSection div.commBox {
 div div#commSection div.commBox .commContent{
     min-height: 100px;
     padding-left: 20px;
+}
+
+div#divide {
+    margin: 45px 0 30px 0;
+}
+
+div#commContentEdit {
+    padding-left: 0;
 }

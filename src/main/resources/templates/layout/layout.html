@@ -60,17 +60,9 @@
                         <input type="password" class="form-control" id="exampleDropdownFormPassword1"
                                placeholder="Password">
                     </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                            <label class="form-check-label" for="dropdownCheck">
-                                아이디 저장
-                            </label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <button type="submit" class="btn btn-primary" id="loginBtn">로그인</button>
                 </form>
-                <div class="dropdown-divider"></div>
+                <hr>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#joinBtn">회원가입</a>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#findPwdBtn">비밀번호 찾기</a>
             </div>
@@ -96,7 +88,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-9">
-                                이메일 <input type="text" id="email" class="form-control" placeholder="이메일을 입력해 주세요.">
+                                이메일 <input type="email" id="email" class="form-control" placeholder="이메일을 입력해 주세요.">
                             </div>
                             <div class="col-3">
                                 <button class="btn btn-primary" id="sendEmail">전송</button>
@@ -114,8 +106,26 @@
                         </div>
                         <br>
                         비밀번호 <input type="password" id="joinPW" placeholder="비밀번호를 입력해 주세요" class="form-control"><br>
-                        학번 <input type="text" id="joinId" placeholder="아이디를 입력해 주세요" class="form-control"><br>
-                        이름 <input type="text" id="name" class="form-control" placeholder="이름을 입력해 주세요"><br>
+                        학번 <input type="text" id="joinId" placeholder="학번을 입력해 주세요" class="form-control"><br>
+                        성별<br>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1"
+                                   class="custom-control-input" value="M">
+                            <label class="custom-control-label" for="customRadioInline1">남자</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" name="customRadioInline1"
+                                   class="custom-control-input" value="W">
+                            <label class="custom-control-label" for="customRadioInline2">여자</label>
+                        </div><br><br>
+                        직책
+                        <select class="custom-select custom-select-lg">
+                            <option value="1">학생회장</option>
+                            <option value="1">학생부회장</option>
+                            <option value="2">반대표</option>
+                            <option value="2">부반대표</option>
+                            <option value="3" selected>학생</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
