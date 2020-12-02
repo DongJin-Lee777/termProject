@@ -13,7 +13,7 @@ $(function() {
                 window.location.href='/editBoard';
             }
         });
-    })
+    });
 
     // 글 수정
     $('#modifyEndBtn').on('click', () => {
@@ -28,5 +28,5 @@ $(function() {
                 window.location.href='/board';
             }
         });
-    })
+    });
 });

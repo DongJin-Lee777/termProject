@@ -13,4 +13,5 @@ public class Board {
     private Date regDate;
     private int visit;
     private int up;
+    private String category_cd;
 }

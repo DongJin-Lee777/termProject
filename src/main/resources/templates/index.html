@@ -7,30 +7,30 @@
 <div th:replace="layout/layout :: header"></div>
 <div class="container" id="mainSection">
     <h1>Timeline</h1>
-    <div class="feed container">
+    <div class="feed container" th:each="boardList : ${boardList}">
         <div class="row feedBox">
             <div class="col-1 upBox">
                 <span class="row up"> ^ </span>
-                <i class="far fa-thumbs-up row"> 5</i>
+                <i class="far fa-thumbs-up row"><span th:text="${boardList.up}"></span></i>
                 <span class="row down"> v </span>
             </div>
             <div class="col-11">
                 <div class="row">
                     <div class="col-12">
                         <div class="row align-items-start">
-                            <div class="col-8">
-                                제목
+                            <div class="col-8" th:text="${boardList.title}">
+
                             </div>
-                            <div class="col-2 text-right">
-                                닉네임
+                            <div class="col-1 text-right writer" th:text="${boardList.bwriter}">
+
                             </div>
-                            <div class="col-2 text-right">
-                                2020-11-27
+                            <div class="col-3 text-right" th:text="${#dates.format(boardList.regDate, 'yyyy-MM-dd HH:mm:ss')}">
+
                             </div>
                         </div>
                         <hr>
-                        <div class="row feedContent">
-                            내용
+                        <div class="row feedContent" th:text="${boardList.bcontent}">
+
                         </div>
                     </div>
                 </div>

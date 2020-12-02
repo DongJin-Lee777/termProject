@@ -34,10 +34,11 @@
     <div id="leftHeader">
         <a href="/">로고자리</a>
         <ul>
-            <li><a href="/notice">Notice</a></li>
-            <li><a href="/class">Class</a></li>
-            <li><a href="/questions">Questions</a></li>
-            <li><a href="/codeReview">Code Review</a></li>
+            <li><a href="/boardList?category=0" id="0">공지</a></li>
+            <li><a href="#" id="1">자유</a></li>
+            <li><a href="#" id="4">반</a></li>
+            <li><a href="#" id="2">질문</a></li>
+            <li><a href="#" id="3">코드 리뷰</a></li>
         </ul>
     </div>
     <div id="rightHeader">
@@ -117,7 +118,8 @@
                             <input type="radio" id="customRadioInline2" name="customRadioInline1"
                                    class="custom-control-input" value="W">
                             <label class="custom-control-label" for="customRadioInline2">여자</label>
-                        </div><br><br>
+                        </div>
+                        <br><br>
                         직책
                         <select class="custom-select custom-select-lg">
                             <option value="1">학생회장</option>
@@ -162,7 +164,6 @@
         </div>
     </div>
 </div>
-
 
 <footer th:fragment="footer">
     <ul class="copyright">

@@ -10,93 +10,21 @@
             <thead class="thead-dark">
             <tr>
                 <th>No.</th>
-                <th>Title</th>
-                <th>ID</th>
-                <th>Comments</th>
-                <th>Reviews</th>
-                <th>Date</th>
+                <th>제목</th>
+                <th>학번</th>
+                <th>댓글수</th>
+                <th>조회수</th>
+                <th>등록일</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th>1</th>
-                <td><a href="#">sdfasdfqrghsdfhehasfgas</a></td>
-                <td>admin</td>
+            <tr th:each="boardList : ${boardList}">
+                <th th:text="${boardList.bno}"></th>
+                <td><a href="#" th:text="${boardList.title}"></a></td>
+                <td th:text="${boardList.bwriter}"></td>
                 <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>2</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>3</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>4</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>5</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>6</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>7</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>8</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>9</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
-            </tr>
-            <tr>
-                <th>10</th>
-                <td>Test</td>
-                <td>admin</td>
-                <td>0</td>
-                <td>0</td>
-                <td>2020-11-28</td>
+                <td th:text="${boardList.visit}"></td>
+                <td th:text="${boardList.regDate}"></td>
             </tr>
             </tbody>
         </table>

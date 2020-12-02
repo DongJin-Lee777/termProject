@@ -1,34 +1,31 @@
 package com.termproject.dongjin.controller;
 
+import com.termproject.dongjin.service.BoardService;
+import com.termproject.dongjin.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class indexController {
+    @Autowired
+    UserService userService;
+    @Autowired
+    BoardService boardService;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("boardList", boardService.boardListAll());
         return "index";
     }
 
-    @GetMapping("/notice")
-    public String noticeList() {
-        return "BoardList";
-    }
-
-    @GetMapping("/class")
-    public String classList() {
-        return "BoardList";
-    }
-
-    @GetMapping("/questions")
-    public String questionsList() {
-        return "BoardList";
-    }
-
-    @GetMapping("/codeReview")
-    public String codeReviewList() {
+    @GetMapping("/boardList")
+    public String noticeList(Model model, @RequestParam(defaultValue = "1") String category) {
+        System.out.println("boardList 요청");
+        model.addAttribute("boardList", boardService.boardList(category));
         return "BoardList";
     }
 
