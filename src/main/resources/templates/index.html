@@ -10,21 +10,21 @@
     <div class="feed container" th:each="boardList : ${boardList}">
         <div class="row feedBox">
             <div class="col-1 upBox">
-                <span class="row up"> ^ </span>
-                <i class="far fa-thumbs-up row"><span th:text="${boardList.up}"></span></i>
-                <span class="row down"> v </span>
+                <i class="fas fa-chevron-up row up" th:onclick="'javascript:up('+${boardList.bno}+')'"></i>
+                <i class="far fa-thumbs-up row colorBlue"> <span th:text="${boardList.up}" class="colorBlack" id="num"></span></i>
+                <i class="fas fa-chevron-down row down" th:onclick="'javascript:down('+${boardList.bno}+')'"></i>
             </div>
             <div class="col-11">
                 <div class="row">
                     <div class="col-12">
                         <div class="row align-items-start">
-                            <div class="col-8" th:text="${boardList.title}">
+                            <div class="col-9" th:text="${boardList.title}">
 
                             </div>
                             <div class="col-1 text-right writer" th:text="${boardList.bwriter}">
 
                             </div>
-                            <div class="col-3 text-right" th:text="${#dates.format(boardList.regDate, 'yyyy-MM-dd HH:mm:ss')}">
+                            <div class="col-2 text-right" th:text="${#dates.format(boardList.regDate, 'yyyy-MM-dd')}">
 
                             </div>
                         </div>
@@ -36,12 +36,12 @@
                 </div>
                 <hr>
                 <div class="row align-items-end">
-                    <div class="col-9"></div>
-                    <div class="col-2 text-right info">
-                        Comments <span class="info_comm">0</span>
+                    <div class="col-8"></div>
+                    <div class="col-2 text-right info" style="padding:0;">
+                        Comments <span class="info_comm" th:text="${boardList.cnt}"></span>
                     </div>
-                    <div class="col-1 text-right info">
-                        Views <span class="info_view">0</span>
+                    <div class="col-2 text-right info">
+                        Views <span class="info_view" th:text="${boardList.visit}">0</span>
                     </div>
                 </div>
             </div>

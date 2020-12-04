@@ -10,22 +10,21 @@
                 <span class="input-group-text">제목</span>
             </div>
             <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="title">test
+                 aria-describedby="inputGroup-sizing-lg" id="title" th:text="${board.title}">
             </div>
-            <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="writer">admin
+            <div class="form-control text-center" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg" id="writer" th:text="${board.bwriter}">
             </div>
-            <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="date">0000.00.00
+            <div class="form-control text-center" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg" id="date" th:text="${#dates.format(board.regDate, 'yyyy-MM-dd')}">
             </div>
         </div>
 
         <div class="input-group input-group-lg">
             <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="content"></div>
+                 aria-describedby="inputGroup-sizing-lg" id="content" th:text="${board.bcontent}"></div>
         </div>
-        <div id="boardBtns">
-            <i class="far fa-thumbs-up row"> 5</i>
+        <div id="boardBtns" th:if="${session.user.id} == ${board.bwriter}">
             <button class="btn btn-success" id="modifyBtn">수정</button>
             <button class="btn btn-danger" id="deleteBtn">삭제</button>
         </div>
@@ -41,59 +40,51 @@
         </div>
         <button class="btn btn-primary col-2" id="commEditBtn">댓글 등록</button>
     </div>
-    <h1><span>2</span> COMMENTS</h1>
-    <div class="container" id="commSection">
-        <div class="container commBox commBoxL">
+    <h1><span th:text="${board.cnt}"></span> COMMENTS</h1>
+    <div class="container" id="commSection" th:each="comm : ${comm}" >
+        <div class="container commBox commBoxR" th:if="${session.user.id} == ${comm.cwriter}">
             <div class="row">
-                <div class="col-1 text-left">
-                    0000000
+                <div class="col-1 text-left cwriter" th:text="${comm.cwriter}">
+
                 </div>
-                <div class="col-9 text-left">
-                    YYYY-MM-DD HH:MI
+                <div class="col-9 text-left OpacityHarf" th:text="${#dates.format(comm.regTime, 'yyyy-MM-dd HH:mm:ss')}" >
+
                 </div>
                 <div class="col-2 text-right">
-                    <i class="fas fa-pen"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>X</span>
+                    <i class="fas fa-pen" th:if="${session.user.id} == ${comm.cwriter}"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span class="colorRed" th:if="${session.user.id} == ${comm.cwriter}" th:onclick="'javascript:deleteComm('+${comm.cno}+')'">X</span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="commContent col-12">
+                <div class="commContent col-12" th:text="${comm.ccontent}">
                     Content
-                </div>
-                <div class="col-12 text-right">
-                    <i class="far fa-thumbs-up"></i> 3
-                    <i class="far fa-grin-squint-tears"></i> 3
-                    <i class="fas fa-poo"></i> 0
                 </div>
             </div>
         </div>
-
-        <div class="container commBox commBoxR">
+        <div class="container commBox commBoxL" th:unless="${session.user.id} == ${comm.cwriter}">
             <div class="row">
-                <div class="col-1 text-left">
-                    0000000
+                <div class="col-1 text-left cwriter" th:text="${comm.cwriter}">
+
                 </div>
-                <div class="col-9 text-left">
-                    YYYY-MM-DD HH:MI
-                </div>
-                <div class="col-2 text-right">
-                    <i class="fas fa-pen"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span>X</span>
+                <div class="col-11 text-left OpacityHarf" th:text="${#dates.format(comm.regTime, 'yyyy-MM-dd HH:mm:ss')}" >
+
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="commContent col-12">
+                <div class="commContent col-12" th:text="${comm.ccontent}">
                     Content
                 </div>
                 <div class="col-12 text-right">
-                    <i class="far fa-thumbs-up"></i> 3
-                    <i class="far fa-grin-squint-tears"></i> 3
-                    <i class="fas fa-poo"></i> 0
+                    <i class="far fa-thumbs-up colorBlue"></i> <span th:text="${comm.up}"></span>
+                    <i class="far fa-grin-squint-tears colorYellow"></i> <span th:text="${comm.fun}"></span>
+                    <i class="fas fa-poo colorPeru"></i> <span th:text="${comm.down}"></span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<input type="hidden" th:value="${board.bno}" id="bno"/>
 <div th:replace="layout/layout :: footer"></div>
 </body>
 </html>

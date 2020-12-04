@@ -3,13 +3,87 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.termproject.dongjin.mapper.BoardMapper">
     <select id="boardListAll" resultType="com.termproject.dongjin.domain.Board">
-        select * from board
+        select b.bno, title, bcontent, bwriter, regDate, visit, up, category_cd, cnt
+        from board b left join (select bno, count(bno) cnt
+                                from comm
+                                group by bno) c
+        on b.bno = c.bno
         order by regDate desc
     </select>
 
     <select id="boardList" resultType="com.termproject.dongjin.domain.Board">
-        select * from board
-        where category_cd = #{category}
+        select *
+        from (
+                 select row_number() over (order by regDate desc) ronum,
+                        b.bno,
+                        title,
+                        bcontent,
+                        bwriter,
+                        regDate,
+                        visit,
+                        up,
+                        category_cd,
+                        cnt
+                 from board b
+                          left join (select bno, count(bno) cnt
+                                     from comm
+                                     group by bno) c
+                                    on b.bno = c.bno
+
+             )
+        where ronum between #{rowStart} and #{rowEnd}
+        and category_cd = #{category}
+        order by regDate desc;
+    </select>
+
+    <select id="boardListCnt" resultType="int">
+        select count(*) from board where category_cd=#{category}
+    </select>
+
+    <select id="board" resultType="com.termproject.dongjin.domain.Board">
+        select b.bno, title, bcontent, bwriter, regDate, visit, up, cnt
+        from board b left join (select bno, count(bno) cnt
+                                from comm
+                                group by bno) c
+                               on b.bno = c.bno
+        where b.bno = #{bno}
         order by regDate desc
     </select>
+
+    <select id="classCode" resultType="String">
+        select category_cd
+        from users join category
+        on users.major = category.category_nm
+        where users.email=#{email}
+    </select>
+
+    <insert id="writeBoard">
+        insert into board
+        values(bno_seq.nextval, #{title}, #{bcontent}, #{bwriter}, sysdate, 0, 0, #{category_cd})
+    </insert>
+
+    <update id="editBoard">
+        update board
+        set title=#{title}, bcontent=#{bcontent}, regDate=sysdate
+        where bno=#{bno}
+    </update>
+
+    <delete id="deleteBoard">
+        delete from board where bno=#{bno}
+    </delete>
+
+    <update id="visit">
+        update board set visit=visit+1
+        where bno=#{bno}
+    </update>
+
+    <update id="up">
+        update board set up=up+1
+        where bno=#{bno}
+    </update>
+
+    <update id="down">
+        update board set up=up-1
+        where bno=#{bno}
+    </update>
 </mapper>

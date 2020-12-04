@@ -14,4 +14,6 @@ public class Board {
     private int visit;
     private int up;
     private String category_cd;
+
+    private int cnt;
 }

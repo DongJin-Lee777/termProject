@@ -12,3 +12,7 @@ div#boardSection div#boardList{
     min-height: max-content;
     padding: 5px;
 }
+
+#editBoardBtn {
+    float: right;
+}

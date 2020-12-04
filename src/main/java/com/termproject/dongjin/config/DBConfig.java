@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.termproject.dongjin.mapper") //인터페이스 경로
 public class DBConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         return DataSourceBuilder.create().build();
     }
 

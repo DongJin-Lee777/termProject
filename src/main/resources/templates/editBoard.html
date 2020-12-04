@@ -10,21 +10,22 @@
                 <span class="input-group-text">제목</span>
             </div>
             <input type="text" class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="title" value="test"/>
+                 aria-describedby="inputGroup-sizing-lg" id="title" th:value="${board.title}"/>
             <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="writer">admin</div>
+                 aria-describedby="inputGroup-sizing-lg" id="writer" th:text="${board.bwriter}"></div>
             <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="date">0000.00.00</div>
+                 aria-describedby="inputGroup-sizing-lg" id="date" th:text="${#dates.format(board.regDate, 'yyyy-MM-dd')}"></div>
         </div>
 
         <div class="input-group input-group-lg">
             <div class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="content" contenteditable="true"></div>
+                 aria-describedby="inputGroup-sizing-lg" id="content" contenteditable="true" th:text="${board.bcontent}"></div>
         </div>
 
         <button class="btn btn-success" id="modifyEndBtn">수정완료</button>
     </div>
 </div>
+<input type="hidden" th:value="${board.bno}" id="bno"/>
 <div th:replace="layout/layout :: footer"></div>
 </body>
 </html>

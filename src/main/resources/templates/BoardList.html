@@ -20,15 +20,47 @@
             <tbody>
             <tr th:each="boardList : ${boardList}">
                 <th th:text="${boardList.bno}"></th>
-                <td><a href="#" th:text="${boardList.title}"></a></td>
+                <td><a th:href="@{'/board/' + ${boardList.bno}}" th:text="${boardList.title}"></a></td>
                 <td th:text="${boardList.bwriter}"></td>
-                <td>0</td>
+                <td th:text="${boardList.cnt}"></td>
                 <td th:text="${boardList.visit}"></td>
                 <td th:text="${boardList.regDate}"></td>
             </tr>
             </tbody>
         </table>
-
+        <!-- paging button-->
+        <div aria-label="Page navigation example" style="display: inline-block">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/?page=1}" aria-label="Previous">
+                        <span aria-hidden="true">처음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{/?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous">
+                        <span aria-hidden="true">이전</span>
+                    </a>
+                </li>
+                <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                    <li class="page-item"
+                        th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+                        th:each="pageButton : ${#numbers.sequence(start, end)}">
+                        <a class="page-link" th:href="@{/?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
+                    </li>
+                </th:block>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}" aria-label="Next">
+                        <span aria-hidden="true">다음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous">
+                        <span aria-hidden="true">끝</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <button class="btn btn-success" id="writeBoardBtn" th:unless="${session.user == null}">글쓰기</button>
     </div>
 </div>
 <div th:replace="layout/layout :: footer"></div>

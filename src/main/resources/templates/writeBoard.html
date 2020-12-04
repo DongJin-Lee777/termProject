@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+<body class="is-preload" style="background-color: #DAE0E6">
+<div th:replace="layout/layout :: header"></div>
+<div class="container">
+    <div class="container" id="board">
+        <div class="input-group input-group-lg">
+            <div class="input-group-prepend">
+                <span class="input-group-text">제목</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg" id="title"/>
+            <div class="input-group-prepend">
+                <span class="input-group-text">분류</span>
+            </div>
+            <select class="custom-select custom-select-sm" id="category">
+                <option value="0" th:unless="${session.user.auth} == 3">공지</option>
+                <option value="1">자유</option>
+                <option value="2">질문</option>
+                <option value="3">코드리뷰</option>
+                <option th:text="${session.user.major}" th:value="${session.classCode}"></option>
+            </select>
+        </div>
+        <div class="input-group input-group-lg">
+            <div class="form-control" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg" id="content" contenteditable="true"></div>
+        </div>
+
+        <button class="btn btn-success" id="writeEndBtn">작성완료</button>
+    </div>
+</div>
+<input type="hidden" th:value="${session.user.id}" id="id"/>
+<div th:replace="layout/layout :: footer"></div>
+</body>
+</html>
