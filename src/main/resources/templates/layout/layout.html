@@ -82,8 +82,8 @@
             <!-- if login -->
             <div class="dropdown-menu dropdown-menu-lg-right" th:unless="${session.user == null}">
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editUser">회원정보 수정</a>
-                <button class="dropdown-item" id="writeLog">작성 기록</button>
-                <button class="dropdown-item" th:unless="${session.user.auth} == 3" id="userManager">관리 메뉴</button>
+                <button type="button" class="dropdown-item" id="writeLog">작성 기록</button>
+                <button type="button" class="dropdown-item" th:unless="${session.user.auth} == 3" id="userManager">관리 메뉴</button>
                 <hr>
                 <button class="dropdown-item" id="logout">System.exit(0)</button>
                 <input type="hidden" th:unless="${session.user} == null" th:value="${session.user.auth}" id="authCheck"/>
