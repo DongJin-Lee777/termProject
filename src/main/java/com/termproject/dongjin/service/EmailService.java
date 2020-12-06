@@ -40,7 +40,7 @@ public class EmailService {
         msgg += ePw + "</strong></div><br/> ";
         msgg += "</div>";
         message.setText(msgg, "utf-8", "html");//내용
-        message.setFrom(new InternetAddress("leik24@gmail.com", "bbs4"));//보내는 사람
+        message.setFrom(new InternetAddress("emailAddress", "DongJin"));//보내는 사람
 
         return message;
     }
