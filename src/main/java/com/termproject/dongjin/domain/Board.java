@@ -16,4 +16,5 @@ public class Board {
     private String category_cd;
 
     private int cnt;
+    private int ronum;
 }

@@ -16,7 +16,8 @@
                  aria-describedby="inputGroup-sizing-lg" id="writer" th:text="${board.bwriter}">
             </div>
             <div class="form-control text-center" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg" id="date" th:text="${#dates.format(board.regDate, 'yyyy-MM-dd')}">
+                 aria-describedby="inputGroup-sizing-lg" id="date"
+                 th:text="${#dates.format(board.regDate, 'yyyy-MM-dd')}">
             </div>
         </div>
 
@@ -24,9 +25,13 @@
             <div class="form-control" aria-label="Sizing example input"
                  aria-describedby="inputGroup-sizing-lg" id="content" th:text="${board.bcontent}"></div>
         </div>
+
         <div id="boardBtns" th:if="${session.user.id} == ${board.bwriter}">
             <button class="btn btn-success" id="modifyBtn">수정</button>
             <button class="btn btn-danger" id="deleteBtn">삭제</button>
+        </div>
+        <div id="boardup">
+            <i class="btn btn-primary far fa-thumbs-up row" th:onclick="'javascript:bup('+${board.bno}+')'"> <span th:text="${board.up}"id="num"></span></i>
         </div>
     </div>
     <!-- COMMENTS -->
@@ -36,49 +41,55 @@
         </div>
     </div>
     <div class="container row" id="commEditBox">
-        <div class="container commBox col-10" contenteditable="true" id="commContentEdit">
+        <div class="container commBox col-10" contenteditable="true" id="commEditContent">
         </div>
         <button class="btn btn-primary col-2" id="commEditBtn">댓글 등록</button>
+        <input type="hidden" th:value="${session.user.id}" id="cwriter"/>
     </div>
     <h1><span th:text="${board.cnt}"></span> COMMENTS</h1>
-    <div class="container" id="commSection" th:each="comm : ${comm}" >
-        <div class="container commBox commBoxR" th:if="${session.user.id} == ${comm.cwriter}">
-            <div class="row">
-                <div class="col-1 text-left cwriter" th:text="${comm.cwriter}">
-
-                </div>
-                <div class="col-9 text-left OpacityHarf" th:text="${#dates.format(comm.regTime, 'yyyy-MM-dd HH:mm:ss')}" >
-
-                </div>
-                <div class="col-2 text-right">
-                    <i class="fas fa-pen" th:if="${session.user.id} == ${comm.cwriter}"></i> &nbsp;&nbsp;&nbsp;&nbsp;<span class="colorRed" th:if="${session.user.id} == ${comm.cwriter}" th:onclick="'javascript:deleteComm('+${comm.cno}+')'">X</span>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="commContent col-12" th:text="${comm.ccontent}">
-                    Content
-                </div>
-            </div>
-        </div>
+    <div class="container" id="commSection" th:each="comm : ${comm}">
         <div class="container commBox commBoxL" th:unless="${session.user.id} == ${comm.cwriter}">
             <div class="row">
                 <div class="col-1 text-left cwriter" th:text="${comm.cwriter}">
 
                 </div>
-                <div class="col-11 text-left OpacityHarf" th:text="${#dates.format(comm.regTime, 'yyyy-MM-dd HH:mm:ss')}" >
+                <div class="col-11 text-left OpacityHarf"
+                     th:text="${#dates.format(comm.regTime, 'yyyy-MM-dd HH:mm:ss')}">
 
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="commContent col-12" th:text="${comm.ccontent}">
-                    Content
+
                 </div>
-                <div class="col-12 text-right">
-                    <i class="far fa-thumbs-up colorBlue"></i> <span th:text="${comm.up}"></span>
-                    <i class="far fa-grin-squint-tears colorYellow"></i> <span th:text="${comm.fun}"></span>
-                    <i class="fas fa-poo colorPeru"></i> <span th:text="${comm.down}"></span>
+                <div class="col-12 text-right i_box">
+                    <i class="far fa-thumbs-up colorBlue a" th:onclick="'javascript:cup('+${comm.cno}+')'"></i> <span th:text="${comm.up}"></span>
+                    <i class="far fa-grin-squint-tears colorYellow a" th:onclick="'javascript:cfun('+${comm.cno}+')'"></i> <span th:text="${comm.fun}"></span>
+                    <i class="fas fa-poo colorPeru a" th:onclick="'javascript:cdown('+${comm.cno}+')'"></i> <span th:text="${comm.down}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="container commBox commBoxR" th:if="${session.user.id} == ${comm.cwriter}">
+            <div class="row">
+                <div class="col-1 text-left cwriter" th:text="${comm.cwriter}">
+
+                </div>
+                <div class="col-9 text-left OpacityHarf"
+                     th:text="${#dates.format(comm.regTime, 'yyyy-MM-dd HH:mm:ss')}">
+
+                </div>
+                <div class="col-2 text-right">
+                    <i class="fas fa-pen editComm" th:if="${session.user.id} == ${comm.cwriter}"
+                       th:onclick="'javascript:editComm('+${comm.cno}+')'"></i> &nbsp;&nbsp;<span
+                        class="colorRed deleteComm" th:if="${session.user.id} == ${comm.cwriter}"
+                        th:onclick="'javascript:deleteComm('+${comm.cno}+')'">X</span>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="commContent col-12" th:text="${comm.ccontent}" contenteditable="false">
+
                 </div>
             </div>
         </div>

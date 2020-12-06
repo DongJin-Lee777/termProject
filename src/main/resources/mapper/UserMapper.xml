@@ -6,4 +6,37 @@
         select * from users
         where email = #{email} and pwd = #{pwd}
     </select>
+
+    <update id="editUser">
+        update users set PWD=#{pwd}, MAJOR=#{major} where id=${id}
+    </update>
+
+    <insert id="join">
+        insert into users
+        values (#{id}, #{pwd}, #{email}, #{gender}, #{auth}, #{major})
+    </insert>
+
+    <select id="findPw" resultType="String">
+        select pwd from users
+        where email = #{email} and id = #{id}
+    </select>
+
+    <select id="userAuthList" resultType="com.termproject.dongjin.domain.Users">
+            select *
+            from (
+                     select row_number() over (order by auth desc) ronum,
+                            uno, id, pwd, email, gender, auth, major
+                     from users
+                     order by auth asc
+                 )
+            where ronum between #{rowStart} and #{rowEnd}
+    </select>
+
+    <select id="userAllCnt" resultType="int">
+        select count(*) from users
+    </select>
+
+    <update id="editAuth">
+        update users set auth = #{auth} where uno = #{uno}
+    </update>
 </mapper>

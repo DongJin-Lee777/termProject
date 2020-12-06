@@ -10,4 +10,6 @@ public class Users {
     private String gender;
     private String auth;
     private String major;
+
+    private int ronum;
 }

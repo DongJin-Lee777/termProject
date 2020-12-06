@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" th:unless="${session.user} == null">
+<head th:replace="layout/layout :: head">
+</head>
+<body class="is-preload" style="background-color: #DAE0E6" th:unless="${session.user.auth} == 3">
+<div th:replace="layout/layout :: header"></div>
+<div class="container" id="Manage">
+    <h1>new Date();</h1>
+    <div class="container" id="chart">
+        <div class="col-6 chartManager">
+            <canvas id="boardChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-6 chartManager">
+            <canvas id="CommChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+    <h1 th:if="${session.user.auth} == 0">전체 글/댓글 관리</h1>
+    <h1 th:unless="${session.user.auth} == 0">반 글/댓글 관리</h1>
+    <div class="container" id="attend">
+        <div class="col-6 boardManager">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>No.</th>
+                    <th>제목</th>
+                    <th>학번</th>
+                    <th>등록일</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="boardList : ${boardList}">
+                    <th th:text="${boardList.ronum}"></th>
+                    <td><a th:href="@{'/board/' + ${boardList.bno}}" th:text="${boardList.title}"></a></td>
+                    <td th:text="${boardList.bwriter}"></td>
+                    <td th:text="${#dates.format(boardList.regDate, 'MM-dd HH:mm')}"></td>
+                    <td><button th:onclick="'javascript:boardDel('+${boardList.bno}+')'">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- paging button-->
+            <div aria-label="Page navigation example" style="display: inline-block">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?bpage=1}" aria-label="Previous">
+                            <span aria-hidden="true">처음</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?bpage={bpage} (bpage = ${bpagination.prevBlock})}" aria-label="Previous">
+                            <span aria-hidden="true">이전</span>
+                        </a>
+                    </li>
+                    <th:block  th:with="start = ${bpagination.startPage}, end = ${bpagination.endPage}">
+                        <li class="page-item"
+                            th:with="start = ${bpagination.startPage}, end = ${bpagination.endPage}"
+                            th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link" th:href="@{userManager?bpage={bpage} (bpage = ${pageButton})}" th:text=${pageButton}></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?bpage={bpage} (bpage = ${bpagination.nextBlock})}" aria-label="Next">
+                            <span aria-hidden="true">다음</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?bpage={bpage} (bpage = ${bpagination.totalPageCnt})}" aria-label="Previous">
+                            <span aria-hidden="true">끝</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-6 boardManager">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>No.</th>
+                    <th>댓글내용</th>
+                    <th>학번</th>
+                    <th>등록일</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="commList : ${commList}">
+                    <th th:text="${commList.ronum}"></th>
+                    <td><a th:href="@{'/board/' + ${commList.bno}}" th:text="${commList.ccontent}"></a></td>
+                    <td th:text="${commList.cwriter}"></td>
+                    <td th:text="${#dates.format(commList.regTime, 'MM-dd HH:mm')}"></td>
+                    <td><button th:onclick="'javascript:deleteComm('+${commList.cno}+')'">X</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- paging button-->
+            <div aria-label="Page navigation example" style="display: inline-block">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?cpage=1}" aria-label="Previous">
+                            <span aria-hidden="true">처음</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?cpage={cpage} (cpage = ${cpagination.prevBlock})}" aria-label="Previous">
+                            <span aria-hidden="true">이전</span>
+                        </a>
+                    </li>
+                    <th:block  th:with="start = ${cpagination.startPage}, end = ${cpagination.endPage}">
+                        <li class="page-item"
+                            th:with="start = ${cpagination.startPage}, end = ${cpagination.endPage}"
+                            th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link" th:href="@{userManager?cpage={cpage} (cpage = ${pageButton})}" th:text=${pageButton}></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?cpage={cpage} (cpage = ${cpagination.nextBlock})}" aria-label="Next">
+                            <span aria-hidden="true">다음</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?cpage={cpage} (cpage = ${cpagination.totalPageCnt})}" aria-label="Previous">
+                            <span aria-hidden="true">끝</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h1>유저 권환관리</h1>
+    <div class="container" id="auth">
+        <div class="container boardManager">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th>No.</th>
+                    <th>학번</th>
+                    <th>반</th>
+                    <th>이메일</th>
+                    <th>권한</th>
+                    <th>권한변경</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="userList : ${userList}">
+                    <th th:text="${userList.ronum}"></th>
+                    <td><a th:href="@{'/userLog?id=' + ${userList.id}}" th:text="${userList.id}"></a></td>
+                    <td th:text="${userList.major}"></td>
+                    <td th:text="${userList.email}"></td>
+                    <td>
+                        <select class="custom-select custom-select-sm" id="authManager">
+                        <option selected>권한</option>
+                        <option value="0">관리자</option>
+                        <option value="1">학생회</option>
+                        <option value="2">반 간부</option>
+                        <option value="3">학생</option>
+                    </select>
+                    </td>
+                    <th><button>권한변경</button></th>
+                </tr>
+                </tbody>
+            </table>
+            <!-- paging button-->
+            <div aria-label="Page navigation example" style="display: inline-block">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?apage=1}" aria-label="Previous">
+                            <span aria-hidden="true">처음</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?apage={apage} (apage = ${apagination.prevBlock})}" aria-label="Previous">
+                            <span aria-hidden="true">이전</span>
+                        </a>
+                    </li>
+                    <th:block  th:with="start = ${apagination.startPage}, end = ${apagination.endPage}">
+                        <li class="page-item"
+                            th:with="start = ${apagination.startPage}, end = ${apagination.endPage}"
+                            th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link" th:href="@{userManager?apage={apage} (apage = ${pageButton})}" th:text=${pageButton}></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?apage={apage} (apage = ${apagination.nextBlock})}" aria-label="Next">
+                            <span aria-hidden="true">다음</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{userManager?apage={apage} (apage = ${apagination.totalPageCnt})}" aria-label="Previous">
+                            <span aria-hidden="true">끝</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="layout/layout :: footer"></div>
+<input type="hidden" th:value="${charData}" id="charData"/>
+<script th:inline="javascript">
+    let boardDates = [];
+    let boardCnts = [];
+    let commDates = [];
+    let commCnts = [];
+    let receiveData = null;
+
+    function splitJSON(receiveData, Dates, Cnts) {
+        $.each(receiveData, function(index, obj){
+            Dates.push(Object.values(obj)[0]);
+            Cnts.push(Object.values(obj)[1]);
+        });
+    }
+
+    receiveData = /*[[${BoardData}]]*/
+    splitJSON(receiveData, boardDates, boardCnts);
+
+    receiveData = /*[[${CommData}]]*/
+    splitJSON(receiveData, commDates, commCnts);
+
+</script>
+<script src="/assets/js/chars.js"></script>
+</body>
+</html>

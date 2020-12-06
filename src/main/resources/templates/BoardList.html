@@ -4,7 +4,7 @@
 <body class="is-preload" style="background-color: #DAE0E6">
 <div th:replace="layout/layout :: header"></div>
 <div class="container" id="boardSection">
-    <h1>게시판</h1>
+    <h1 th:text="${boardName}"></h1>
     <div class="container" id="boardList">
         <table class="table table-hover">
             <thead class="thead-dark">
@@ -19,12 +19,12 @@
             </thead>
             <tbody>
             <tr th:each="boardList : ${boardList}">
-                <th th:text="${boardList.bno}"></th>
+                <th th:text="${boardList.ronum}"></th>
                 <td><a th:href="@{'/board/' + ${boardList.bno}}" th:text="${boardList.title}"></a></td>
                 <td th:text="${boardList.bwriter}"></td>
                 <td th:text="${boardList.cnt}"></td>
                 <td th:text="${boardList.visit}"></td>
-                <td th:text="${boardList.regDate}"></td>
+                <td th:text="${#dates.format(boardList.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
             </tr>
             </tbody>
         </table>
@@ -32,12 +32,12 @@
         <div aria-label="Page navigation example" style="display: inline-block">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" th:href="@{/?page=1}" aria-label="Previous">
+                    <a class="page-link" th:href="@{boardList?category={category}&page=1 (category = ${category})}" aria-label="Previous">
                         <span aria-hidden="true">처음</span>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" th:href="@{/?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous">
+                    <a class="page-link" th:href="@{boardList?category={category}&page={page} (page = ${pagination.prevBlock}, category = ${category})}" aria-label="Previous">
                         <span aria-hidden="true">이전</span>
                     </a>
                 </li>
@@ -45,16 +45,16 @@
                     <li class="page-item"
                         th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
                         th:each="pageButton : ${#numbers.sequence(start, end)}">
-                        <a class="page-link" th:href="@{/?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
+                        <a class="page-link" th:href="@{boardList?category={category}&page={page} (page = ${pageButton}, category = ${category})}" th:text=${pageButton}></a>
                     </li>
                 </th:block>
                 <li class="page-item">
-                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}" aria-label="Next">
+                    <a class="page-link" th:href="@{boardList?category={category}&page={page} (page = ${pagination.nextBlock}, category = ${category})}" aria-label="Next">
                         <span aria-hidden="true">다음</span>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous">
+                    <a class="page-link" th:href="@{boardList?category={category}&page={page} (page = ${pagination.totalPageCnt}, category = ${category})}" aria-label="Previous">
                         <span aria-hidden="true">끝</span>
                     </a>
                 </li>

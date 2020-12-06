@@ -12,9 +12,18 @@ div div#board div#content {
     min-height: 450px;
 }
 
-div div#board div#boardBtns {
+div div#board div#boardBtns,
+div div#board div#boardup {
     float: right;
     margin: 10px 0 10px 10px;
+}
+
+div div#board div#boardup {
+    font-size: 25px;
+    cursor: pointer;
+    width: 1.8em;
+    height: 1.8em;
+    margin-right: 20px;
 }
 
 h1 {
@@ -26,7 +35,7 @@ div#commEditBox {
     margin-bottom: 30px;
 }
 
-div#commEditBox div#commContentEdit {
+div#commEditBox div#commEditContent {
     border: 1px solid silver;
     background-color: white;
     margin: 0;
@@ -63,6 +72,11 @@ div#commContentEdit {
     padding-left: 0;
 }
 
+i.editComm,
+span.deleteComm {
+    cursor: pointer;
+}
+
 .cwriter {
     font-weight: bold;
 }
@@ -89,4 +103,12 @@ div#commContentEdit {
 
 .colorBlack {
     color: black;
+}
+
+.a{
+    cursor: pointer;
+}
+
+.i_box {
+    font-size: 20px;
 }

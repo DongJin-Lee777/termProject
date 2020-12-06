@@ -1,3 +1,9 @@
-div#board select#category {
+div#board select#category_cd {
     max-width: 130px;
+}
+
+#writeEndBtn,
+#modifyEndBtn{
+    float:right;
+    margin: 10px 0 10px 10px;
 }

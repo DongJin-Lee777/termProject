@@ -10,9 +10,9 @@
     <div class="feed container" th:each="boardList : ${boardList}">
         <div class="row feedBox">
             <div class="col-1 upBox">
-                <i class="fas fa-chevron-up row up" th:onclick="'javascript:up('+${boardList.bno}+')'"></i>
+                <i class="fas fa-chevron-up row up" th:onclick="'javascript:bup('+${boardList.bno}+')'" th:unless="${session.user} == null"></i>
                 <i class="far fa-thumbs-up row colorBlue"> <span th:text="${boardList.up}" class="colorBlack" id="num"></span></i>
-                <i class="fas fa-chevron-down row down" th:onclick="'javascript:down('+${boardList.bno}+')'"></i>
+                <i class="fas fa-chevron-down row down" th:onclick="'javascript:bdown('+${boardList.bno}+')'" th:unless="${session.user} == null"></i>
             </div>
             <div class="col-11">
                 <div class="row">

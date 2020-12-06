@@ -13,6 +13,7 @@ div#boardSection div#boardList{
     padding: 5px;
 }
 
-#editBoardBtn {
+#editBoardBtn,
+#writeBoardBtn{
     float: right;
 }

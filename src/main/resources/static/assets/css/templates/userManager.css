@@ -1,0 +1,39 @@
+div#Manage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div#Manage div#chart,
+div#Manage div#attend {
+    margin: 15px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: row;
+}
+
+div.chartManager,
+div.boardManager{
+    border: 2px solid black;
+}
+
+div#Manage div#chart div.chartManager:first-child,
+div#Manage div#attend div.boardManager:first-child{
+    margin-right: 10px;
+}
+
+div.boardManager {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+    text-align: center;
+    min-height: 400px;
+}
+
+div#auth {
+    margin-bottom: 50px;
+}

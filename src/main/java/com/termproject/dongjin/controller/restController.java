@@ -9,6 +9,7 @@ import com.termproject.dongjin.service.CommService;
 import com.termproject.dongjin.service.EmailService;
 import com.termproject.dongjin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -28,11 +29,12 @@ public class restController {
     @PostMapping("/rest/join")
     public void join(Users users) {
         System.out.println(users.toString());
+        userService.join(users);
     }
 
     // 로그인
     @PostMapping("/rest/login")
-    public Users login(Users users, HttpSession httpSession) {
+    public Users login(Users users, HttpSession httpSession, Model model) {
         System.out.println("login : " + users.toString());
         System.out.println("login return : " + userService.login(users));
         httpSession.setAttribute("user", userService.login(users));
@@ -40,6 +42,33 @@ public class restController {
         return userService.login(users);
     }
 
+    // 비밀번호 찾기
+    @PostMapping("/rest/findPw")
+    public String findPw(Users user) {
+        System.out.println("findPw : " + user.toString());
+        System.out.println("findPw : " + userService.findPw(user));
+        return userService.findPw(user);
+    }
+
+    // 로그아웃
+    @PutMapping("/rest/logout")
+    public void logout(HttpSession httpSession) {
+        httpSession.invalidate();
+    }
+
+    // 회원정보 수정
+    @PostMapping("/rest/editUser")
+    public void editUser(Users user, HttpSession httpSession) {
+        System.out.println(user.toString());
+        userService.editUser(user);
+        httpSession.invalidate();
+    }
+
+    @PostMapping("/rest/editAuth")
+    public void editAuth(Users users) {
+        System.out.println(users.toString());
+        userService.editAuth(users);
+    }
     // 글작성
     @PutMapping("/rest/writeBoard")
     public void write(Board board) {
@@ -66,7 +95,7 @@ public class restController {
     }
 
     // 댓글 수정
-    @PostMapping("/rest/editComm")
+    @PutMapping("/rest/editComm")
     public void editComm(Comm comm) {
         commService.editComm(comm);
     }
@@ -87,6 +116,24 @@ public class restController {
     @PutMapping("/rest/down")
     public void down(@RequestParam(defaultValue = "1") int bno) {
         boardService.down(bno);
+    }
+
+    // 댓글 좋아요 증가
+    @PutMapping("/rest/commUp")
+    public void commUp(@RequestParam(defaultValue = "1") int cno) {
+        commService.commUp(cno);
+    }
+
+    // 댓글 재미있어요 증가
+    @PutMapping("/rest/commFun")
+    public void commFun(@RequestParam(defaultValue = "1") int cno) {
+        commService.commFun(cno);
+    }
+
+    // 댓글 똥 증가
+    @PutMapping("/rest/commDown")
+    public void commDown(@RequestParam(defaultValue = "1") int cno) {
+        commService.commDown(cno);
     }
 
     // 메일 전송

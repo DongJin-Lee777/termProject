@@ -11,6 +11,21 @@
         order by regDate desc
     </select>
 
+    <select id="boardListAllPage" resultType="com.termproject.dongjin.domain.Board">
+        select *
+        from (
+             select row_number() over (order by regDate desc) ronum,
+                    bno,
+                    concat(substr(title, 0, 15), '...') title,
+                    bwriter,
+                    regDate,
+                    category_cd
+             from board
+         )
+        where ronum between #{rowStart} and #{rowEnd}
+        order by regDate desc
+    </select>
+
     <select id="boardList" resultType="com.termproject.dongjin.domain.Board">
         select *
         from (
@@ -29,16 +44,48 @@
                                      from comm
                                      group by bno) c
                                     on b.bno = c.bno
-
+                 where category_cd = #{category}
              )
         where ronum between #{rowStart} and #{rowEnd}
-        and category_cd = #{category}
-        order by regDate desc;
+        order by regDate desc
+    </select>
+
+    <select id="boardUserList" resultType="com.termproject.dongjin.domain.Board">
+        select *
+        from (
+                 select row_number() over (order by regDate desc) ronum,
+                        b.bno,
+                        title,
+                        bcontent,
+                        bwriter,
+                        regDate,
+                        visit,
+                        up,
+                        category_cd,
+                        cnt
+                 from board b
+                          left join (select bno, count(bno) cnt
+                                     from comm
+                                     group by bno) c
+                                    on b.bno = c.bno
+                 where bwriter = #{id}
+             )
+        where ronum between #{rowStart} and #{rowEnd}
+        order by regDate desc
+    </select>
+
+    <select id="boardAllListCnt" resultType="int">
+        select count(*) from board
     </select>
 
     <select id="boardListCnt" resultType="int">
         select count(*) from board where category_cd=#{category}
     </select>
+
+    <select id="boardUserListCnt" resultType="int">
+        select count(*) from board where bwriter = #{id}
+    </select>
+
 
     <select id="board" resultType="com.termproject.dongjin.domain.Board">
         select b.bno, title, bcontent, bwriter, regDate, visit, up, cnt
@@ -55,6 +102,12 @@
         from users join category
         on users.major = category.category_nm
         where users.email=#{email}
+    </select>
+
+    <select id="className" resultType="String">
+        select category_nm
+        from category
+        where category_cd=#{category}
     </select>
 
     <insert id="writeBoard">
@@ -86,4 +139,15 @@
         update board set up=up-1
         where bno=#{bno}
     </update>
+
+    <select id="boardTime" resultType="com.termproject.dongjin.domain.Time">
+        select *
+        from  (
+                SELECT TO_CHAR(regDate,'RRRR-MM-DD HH24') divide, count(regDate) dateCnt
+                FROM board
+                GROUP BY TO_CHAR(regDate,'RRRR-MM-DD HH24')
+                )
+        where substr(to_char(sysdate, 'RRRR-MM-DD'), 0, 10) = substr(divide, 0, 10)
+        order by divide asc
+    </select>
 </mapper>

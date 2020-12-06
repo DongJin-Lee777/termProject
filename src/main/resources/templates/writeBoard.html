@@ -14,8 +14,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">분류</span>
             </div>
-            <select class="custom-select custom-select-sm" id="category">
-                <option value="0" th:unless="${session.user.auth} == 3">공지</option>
+            <select class="custom-select custom-select-sm" id="category_cd">
+                <option value="0">공지</option>
                 <option value="1">자유</option>
                 <option value="2">질문</option>
                 <option value="3">코드리뷰</option>

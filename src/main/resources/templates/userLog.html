@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--th:unless="${session.user} == null"-->
+<head th:replace="layout/layout :: head">
+</head>
+<body class="is-preload" style="background-color: #DAE0E6">
+<div th:replace="layout/layout :: header"></div>
+<div class="container" id="Log">
+    <h1>내 활동</h1>
+    <h5>-게시판-</h5>
+    <div class="container" id="board">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>No.</th>
+                <th>제목</th>
+                <th>학번</th>
+                <th>댓글수</th>
+                <th>조회수</th>
+                <th>등록일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="boardList : ${boardList}">
+                <th th:text="${boardList.ronum}"></th>
+                <td><a th:href="@{'/board/' + ${boardList.bno}}" th:text="${boardList.title}"></a></td>
+                <td th:text="${boardList.bwriter}"></td>
+                <td th:text="${boardList.cnt}"></td>
+                <td th:text="${boardList.visit}"></td>
+                <td th:text="${#dates.format(boardList.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- paging button-->
+        <div aria-label="Page navigation example" style="display: inline-block">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{userLog?id={id}&bpage=1 (id = ${session.user.id})}" aria-label="Previous">
+                        <span aria-hidden="true">처음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{userLog?id={id}&bpage={bpage} (bpage = ${bpagination.prevBlock}, id = ${session.user.id})}" aria-label="Previous">
+                        <span aria-hidden="true">이전</span>
+                    </a>
+                </li>
+                <th:block  th:with="start = ${bpagination.startPage}, end = ${bpagination.endPage}">
+                    <li class="page-item"
+                        th:with="start = ${bpagination.startPage}, end = ${bpagination.endPage}"
+                        th:each="pageButton : ${#numbers.sequence(start, end)}">
+                        <a class="page-link" th:href="@{userLog?id={id}&bpage={bpage} (bpage = ${pageButton}, id = ${session.user.id})}" th:text=${pageButton}></a>
+                    </li>
+                </th:block>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{userLog?id={id}&bpage={bpage} (bpage = ${bpagination.nextBlock}, id = ${session.user.id})}" aria-label="Next">
+                        <span aria-hidden="true">다음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{userLog?id={id}&bpage={bpage} (bpage = ${bpagination.totalPageCnt}, id = ${session.user.id})}" aria-label="Previous">
+                        <span aria-hidden="true">끝</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <h5>-댓글-</h5>
+    <div class="container" id="comment">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>No.</th>
+                <th>댓글내용</th>
+                <th>학번</th>
+                <th>등록일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="commList : ${commList}">
+                <th th:text="${commList.ronum}"></th>
+                <td><a th:href="@{'/board/' + ${commList.bno}}" th:text="${commList.ccontent}"></a></td>
+                <td th:text="${commList.cwriter}"></td>
+                <td th:text="${#dates.format(commList.regTime, 'MM-dd HH:mm')}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- paging button-->
+        <div aria-label="Page navigation example" style="display: inline-block">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{userLog?id={id}&cpage=1 (id = ${session.user.id})}" aria-label="Previous">
+                        <span aria-hidden="true">처음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{userLog?id={id}&cpage={cpage} (cpage = ${cpagination.prevBlock}, id = ${session.user.id})}" aria-label="Previous">
+                        <span aria-hidden="true">이전</span>
+                    </a>
+                </li>
+                <th:block  th:with="start = ${cpagination.startPage}, end = ${cpagination.endPage}">
+                    <li class="page-item"
+                        th:with="start = ${cpagination.startPage}, end = ${cpagination.endPage}"
+                        th:each="pageButton : ${#numbers.sequence(start, end)}">
+                        <a class="page-link" th:href="@{userLog?id={id}&cpage={cpage} (cpage = ${pageButton}, id = ${session.user.id})}" th:text=${pageButton}></a>
+                    </li>
+                </th:block>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{userLog?id={id}&cpage={cpage} (cpage = ${cpagination.nextBlock}, id = ${session.user.id})}" aria-label="Next">
+                        <span aria-hidden="true">다음</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{userLog?id={id}&cpage={cpage} (cpage = ${cpagination.totalPageCnt}, id = ${session.user.id})}" aria-label="Previous">
+                        <span aria-hidden="true">끝</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </div>
+</div>
+<div th:replace="layout/layout :: footer"></div>
+</body>
+</html>
